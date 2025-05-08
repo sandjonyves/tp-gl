@@ -1,6 +1,6 @@
-import vehicleModel from "../models/vehicle.model"
+import Vehicle from "../models/vehicle.model"
 const getAllVehicles=(res,req)=>{
-    const allVehicles=vehicleModel.getAllVehicles()
+    const allVehicles=Vehicle.getAllVehicles()
     if(allVehicles){
         return res
     }
