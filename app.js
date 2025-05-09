@@ -4,7 +4,9 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+
 var vehicleRoute = require("./routes/vehicule.route");
+var userRoute = require("./routes/user.route");
 var sequelize = require("./config/db");
 var app = express();
 
@@ -31,10 +33,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/vehicles", vehicleRoute);
+app.use("/users", userRoute);
+app.use("/",(req, res) => {
+  res.send(" <H1 > WELCOME ON OUR TP GL ! </H1>");
+})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  console.log('hello 404');
+  next(createError(404));
+
 });
 
 // error handler
@@ -46,6 +53,11 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render("error");
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(3001, () => {
+  console.log(`Server is running on http://localhost:${3001}`);
 });
 
 module.exports = app;
