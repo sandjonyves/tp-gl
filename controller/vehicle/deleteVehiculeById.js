@@ -1,4 +1,4 @@
-const Vehicle = require("../models/vehicle.model");
+const Vehicle = require("../../models/vehicle.model");
 
 const deleVehiculeById = async (req, res) => {
   const { id } = req.params;  // Utilisation correcte avec route dynamique

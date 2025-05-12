@@ -1,4 +1,4 @@
-const Vehicle = require("../models/vehicle.model");
+const Vehicle = require("../../models/vehicle.model");
 
 const updateVehiculeById = async (req, res) => {
   const { id } = req.params;
@@ -11,7 +11,7 @@ const updateVehiculeById = async (req, res) => {
       return res.status(404).json({ message: "Véhicule non trouvé" });
     }
 
-    // ✅ On utilise les champs reçus pour mettre à jour l'objet
+    
     if (registrationNumber !== undefined) vehicule.registrationNumber = registrationNumber;
     if (make !== undefined) vehicule.make = make;
     if (model !== undefined) vehicule.model = model;
