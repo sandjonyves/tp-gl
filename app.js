@@ -34,9 +34,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/vehicles", vehicleRoute);
 app.use("/users", userRoute);
-app.use("/",(req, res) => {
-  res.send(" <H1 > WELCOME ON OUR TP GL ! </H1>");
-})
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
