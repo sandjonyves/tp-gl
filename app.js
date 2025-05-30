@@ -3,18 +3,24 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger");
 
 var vehicleRoute = require("./routes/vehicule.route");
 var userRoute = require("./routes/user.route");
 var sequelize = require("./config/db");
 var app = express();
 
+
+
 //Hello world example to test pull request
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
+
+//swagger
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // create database connection
 sequelize
