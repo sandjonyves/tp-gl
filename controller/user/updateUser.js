@@ -53,6 +53,8 @@ const updateUserRole = async (req, res) => {
 };
 
 module.exports = {
+
   updateUserName,
   updateUserRole,
 };
+
