@@ -6,7 +6,12 @@ require("dotenv").config();
 const loginUser = async (req, res) => {
     try {
         const { name, password } = req.body;
-
+        if (!name) {
+            return res.status(400).json({ message: "Authentication failed: Name is required" });
+        }
+        if (!password) {
+            return res.status(400).json({ message: "Authentication failed: Password is required" });
+        }
         const user = await User.findOne({ where: { name } });
         
         if (!user) {

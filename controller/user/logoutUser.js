@@ -1,18 +1,44 @@
-const User = require("../../models/user.model");
-
+const User = require('../../models/user.model');
 
 const logoutUser = async (req, res) => {
+  try {
     const token = req.cookies.refreshToken;
-    const user = await User.findOne({ where: { refreshToken: token } });
-  
-    if (user) {
-      user.refreshToken = null;
-      await user.save();
+    if (token) {
+      const user = await User.findOne({ where: { refreshToken: token } });
+      if (user) {
+        user.refreshToken = null;
+        await user.save();
+      }
     }
-  
-    res.clearCookie('accessToken');
-    res.clearCookie('refreshToken');
-    res.json({ message: 'Déconnecté avec succès' });
-  };
 
-  module.exports = logoutUser;
+    res.clearCookie('accessToken', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict'
+    });
+    res.clearCookie('refreshToken', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict'
+    });
+
+    return res.status(200).json({ message: 'Déconnecté avec succès' });
+  } catch (error) {
+    if (process.env.NODE_ENV !== 'test') {
+      console.error('Logout error:', error);
+    }
+    res.clearCookie('accessToken', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict'
+    });
+    res.clearCookie('refreshToken', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict'
+    });
+    return res.status(500).json({ message: error.message || 'Erreur lors de la déconnexion' });
+  }
+};
+
+module.exports = logoutUser;
