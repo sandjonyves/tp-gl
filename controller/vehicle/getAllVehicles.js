@@ -1,4 +1,4 @@
-import Vehicle from "../../models/vehicle.model"
+const Vehicle = require("../../models/vehicle.model");
 
 
 const getAllVehicles = async (req, res) => {
@@ -13,3 +13,5 @@ const getAllVehicles = async (req, res) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 }
+
+module.exports = getAllVehicles;

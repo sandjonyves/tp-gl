@@ -5,7 +5,7 @@ const {
   createUser,
   loginUser,
   logoutUser,
-  refreshExpiredToken,  
+  refreshExpiretedToken,  
   updateUserName,      
   updateUserRole      
 } = require("../controller/user/index.controller");
@@ -14,7 +14,7 @@ const {
 router.post("/register", createUser);  
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
-router.post("/refresh", refreshExpiredToken); 
+router.post("/refresh", refreshExpiretedToken); 
 
 
 
