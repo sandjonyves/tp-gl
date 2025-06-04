@@ -26,10 +26,10 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
     ports:
-      - "3000:3000"
+      - "3001:3001"
     networks:
       - backend
-    command: sh -c "npm install && node ./scripts/seeds.js && npm start"
+    command: sh -c "node ./scripts/seeds.js && npm start"
 
 volumes:
   pgdata:
