@@ -5,13 +5,23 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./swagger");
+const cors = require("cors");
 
 var vehicleRoute = require("./routes/vehicule.route");
 var userRoute = require("./routes/user.route");
 var sequelize = require("./config/db");
 var app = express();
 
+// Configuration CORS
+app.use(cors({
+  origin: 'http://localhost:3000', // Permet toutes les origines
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
+app.use(express.json());
+app.use(require('cookie-parser')());
 
 //Hello world example to test pull request
 

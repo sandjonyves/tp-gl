@@ -12,6 +12,7 @@ const loginUser = async (req, res) => {
         if (!password) {
             return res.status(400).json({ message: "Authentication failed: Password is required" });
         }
+        
         const user = await User.findOne({ where: { name } });
         
         if (!user) {
@@ -36,7 +37,7 @@ const loginUser = async (req, res) => {
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+            sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
             maxAge: ms(process.env.ACCESS_TOKEN_EXPIRES),
         });
 
@@ -44,11 +45,12 @@ const loginUser = async (req, res) => {
         res.cookie("refreshToken", refreshToken, {  // Correction: 'accessToken' -> 'refreshToken'
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+            sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
             maxAge: ms(process.env.REFRESH_TOKEN_EXPIRES),
         });
 
         return res.status(200).json({ 
+            ...user.toJSON(), // Utilisation de toJSON pour éviter les champs sensibles
             message: "Login successful",
             accessToken,
             refreshToken
