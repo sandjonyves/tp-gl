@@ -26,24 +26,23 @@ const createUser = async (req, res) => {
 
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+            // secure: true,
+            // sameSite: "None",
             maxAge: ms(process.env.ACCESS_TOKEN_EXPIRES),
         });
 
         // Et ici aussi pour le refreshToken
-        res.cookie("refreshToken", refreshToken, {  // Correction: 'accessToken' -> 'refreshToken'
+        res.cookie("refreshToken", refreshToken, {  
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+            // secure: true,
+            // sameSite: "None",
             maxAge: ms(process.env.REFRESH_TOKEN_EXPIRES),
         });
 
-        return res.status(200).json({ 
-            ...newUser.toJSON(), // Utilisation de toJSON pour éviter les champs sensibles
-            message: "Login successful",
-            accessToken,
-            refreshToken
+        return res.status(201).json({ 
+            ...newUser, 
+            message: "user created successfully",
+            
         });
 
     } catch (error) {

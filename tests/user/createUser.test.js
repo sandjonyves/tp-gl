@@ -53,6 +53,7 @@ describe('createUser Function', () => {
       name: 'testuser',
       password: 'hashedpassword',
       role: 'user',
+      message: "user created successfully",
       generateTokens: jest.fn().mockResolvedValue({
         accessToken: 'mockAccessToken',
         refreshToken: 'mockRefreshToken'
@@ -76,16 +77,17 @@ describe('createUser Function', () => {
     expect(mockUser.save).toHaveBeenCalled();
     
     expect(res.cookie).toHaveBeenCalledWith('accessToken', 'mockAccessToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict',
-      maxAge: 900000
+         // Correction: 'accessToken' -> 'refreshToken'
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
+            maxAge: expect.any(Number)
     });
     
     expect(res.cookie).toHaveBeenCalledWith('refreshToken', 'mockRefreshToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict',
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
       maxAge: expect.any(Number)
     });
     

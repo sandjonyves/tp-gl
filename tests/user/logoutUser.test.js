@@ -45,14 +45,14 @@ describe('logoutUser Function', () => {
     expect(mockUser.refreshToken).toBe(null);
     expect(mockUser.save).toHaveBeenCalledTimes(1);
     expect(res.clearCookie).toHaveBeenCalledWith('accessToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict'
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     expect(res.clearCookie).toHaveBeenCalledWith('refreshToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict'
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({ message: 'Déconnecté avec succès' });
@@ -65,14 +65,14 @@ describe('logoutUser Function', () => {
 
     expect(User.findOne).toHaveBeenCalledWith({ where: { refreshToken: 'mockRefreshToken' } });
     expect(res.clearCookie).toHaveBeenCalledWith('accessToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict'
+                 httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     expect(res.clearCookie).toHaveBeenCalledWith('refreshToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict'
+                  httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({ message: 'Déconnecté avec succès' });
@@ -85,14 +85,14 @@ describe('logoutUser Function', () => {
 
     expect(User.findOne).not.toHaveBeenCalled();
     expect(res.clearCookie).toHaveBeenCalledWith('accessToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict'
+                 httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     expect(res.clearCookie).toHaveBeenCalledWith('refreshToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict'
+               httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({ message: 'Déconnecté avec succès' });
@@ -107,14 +107,14 @@ describe('logoutUser Function', () => {
     expect(User.findOne).toHaveBeenCalledWith({ where: { refreshToken: 'mockRefreshToken' } });
     expect(consoleErrorSpy).not.toHaveBeenCalled(); // Pas de log en environnement de test
     expect(res.clearCookie).toHaveBeenCalledWith('accessToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict'
+                  httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     expect(res.clearCookie).toHaveBeenCalledWith('refreshToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict'
+                  httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ message: errorMessage });
@@ -130,14 +130,14 @@ describe('logoutUser Function', () => {
     expect(consoleErrorSpy).toHaveBeenCalledWith('Logout error:', expect.any(Error));
     expect(consoleErrorSpy).toHaveBeenCalledWith('Logout error:', expect.objectContaining({ message: errorMessage }));
     expect(res.clearCookie).toHaveBeenCalledWith('accessToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict'
+                  httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     expect(res.clearCookie).toHaveBeenCalledWith('refreshToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict'
+                 httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ message: errorMessage });

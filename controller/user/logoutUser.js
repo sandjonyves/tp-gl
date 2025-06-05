@@ -12,14 +12,14 @@ const logoutUser = async (req, res) => {
     }
 
     res.clearCookie('accessToken', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict'
+          httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     res.clearCookie('refreshToken', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict'
+     httpOnly: true,
+      secure: true,
+      sameSite: "None",
     });
 
     return res.status(200).json({ message: 'Déconnecté avec succès' });
@@ -28,14 +28,14 @@ const logoutUser = async (req, res) => {
       console.error('Logout error:', error);
     }
     res.clearCookie('accessToken', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict'
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     res.clearCookie('refreshToken', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict'
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
     });
     return res.status(500).json({ message: error.message || 'Erreur lors de la déconnexion' });
   }
