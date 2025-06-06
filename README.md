@@ -24,8 +24,8 @@ authetification systeme opt by (message or email)
 ### 1. Cloner le projet
 
 ```bash
-git clone https://github.com/ton-username/ton-projet.git
-cd ton-projet
+git clone https://github.com/sandjonyves/tp-gl.git
+cd tp-gl
 ```
 
 ### 2. Installer les dépendances

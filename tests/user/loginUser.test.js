@@ -66,21 +66,22 @@ describe('loginUser Function', () => {
     expect(mockUser.save).toHaveBeenCalledTimes(1);
     
     expect(res.cookie).toHaveBeenCalledWith('accessToken', 'mockAccessToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict',
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
       maxAge: 900000
     });
     
     expect(res.cookie).toHaveBeenCalledWith('refreshToken', 'mockRefreshToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict',
+                httpOnly: true,
+            secure: true,
+            sameSite: "None",
       maxAge: 604800000
     });
     
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
+      ...mockUser,
       message: 'Login successful',
       accessToken: 'mockAccessToken',
       refreshToken: 'mockRefreshToken'
@@ -152,15 +153,15 @@ describe('loginUser Function', () => {
     await loginUser(req, res);
 
     expect(res.cookie).toHaveBeenCalledWith('accessToken', 'mockAccessToken', expect.objectContaining({
-      httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
       maxAge: 900000
     }));
     expect(res.cookie).toHaveBeenCalledWith('refreshToken', 'mockRefreshToken', expect.objectContaining({
-      httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
       maxAge: 604800000
     }));
   });

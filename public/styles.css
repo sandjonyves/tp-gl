@@ -68,3 +68,26 @@ footer {
 footer p {
   font-size: 1rem;
 }
+
+
+.styled-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #4CAF50; /* indigo-600 */
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .styled-button:hover {
+    background-color: #499a4b; /* indigo-700 */
+    transform: translateY(-2px);
+  }
+
+  .styled-button:active {
+    background-color: #62cd66; /* indigo-800 */
+    transform: translateY(0);
+  }

@@ -6,6 +6,8 @@ var logger = require("morgan");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./swagger");
 const cors = require("cors");
+const bodyParser = require("body-parser");
+
 
 var vehicleRoute = require("./routes/vehicule.route");
 var userRoute = require("./routes/user.route");
@@ -14,15 +16,16 @@ var app = express();
 
 // Configuration CORS
 app.use(cors({
-  origin: 'http://localhost:3000', // Permet toutes les origines
+  origin: ['http://localhost:3000', 'http://localhost:3002', 'https://tp-gl-frontend.vercel.app'], // Permet toutes les origines
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
-app.use(require('cookie-parser')());
-
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json())
+app.use(cookieParser())
 //Hello world example to test pull request
 
 // view engine setup
