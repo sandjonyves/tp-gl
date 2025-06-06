@@ -21,9 +21,10 @@ const refreshExpiredToken = async (req, res) => {
       const { accessToken } = user.generateTokens();
       res.cookie('accessToken', accessToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        maxAge: 15 * 60 * 1000 // 15 minutes
+            httpOnly: true,
+            secure: true,
+            maxAge: 900000,
+           sameSite: "strict",
       });
 
       return res.status(200).json({ message: 'Token refreshed' });
