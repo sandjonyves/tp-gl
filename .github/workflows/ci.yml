@@ -12,6 +12,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      JWT_SECRET: LaVue
+      ACCESS_TOKEN_EXPIRES: 2d
+      REFRESH_TOKEN_EXPIRES: 7d
+      NODE_ENV: production
+      PORT: 3001
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -31,10 +39,10 @@ jobs:
         run: npm test
 
       # - name: Build Docker image
-      #   run: docker build -t ${{ secretes.DOCKER_USERNAME }}/backend-tp-gl:latest .
-      
+      #   run: docker build -t ${{ secrets.DOCKER_USERNAME }}/backend-tp-gl:latest .
+
       # - name: Log in to Docker Hub
       #   run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-      
+
       # - name: Push Docker image
       #   run: docker push ${{ secrets.DOCKER_USERNAME }}/backend-tp-gl:latest
