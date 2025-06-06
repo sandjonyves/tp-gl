@@ -36,16 +36,16 @@ const loginUser = async (req, res) => {
         // Correction ici: 'acessToken' -> 'accessToken'
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            // secure: true,
-            // sameSite: "None",
+            secure: true,
+            sameSite: "None",
             maxAge: ms(process.env.ACCESS_TOKEN_EXPIRES),
         });
 
         // Et ici aussi pour le refreshToken
         res.cookie("refreshToken", refreshToken, {  // Correction: 'accessToken' -> 'refreshToken'
             httpOnly: true,
-            // secure: true,
-            // sameSite: "None",
+            secure: true,
+            sameSite: "None",
             maxAge: ms(process.env.REFRESH_TOKEN_EXPIRES),
         });
 

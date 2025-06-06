@@ -26,16 +26,16 @@ const createUser = async (req, res) => {
 
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            // secure: true,
-            // sameSite: "None",
+            secure: true,
+            sameSite: "None",
             maxAge: ms(process.env.ACCESS_TOKEN_EXPIRES),
         });
 
         // Et ici aussi pour le refreshToken
         res.cookie("refreshToken", refreshToken, {  
             httpOnly: true,
-            // secure: true,
-            // sameSite: "None",
+            secure: true,
+            sameSite: "None",
             maxAge: ms(process.env.REFRESH_TOKEN_EXPIRES),
         });
 
